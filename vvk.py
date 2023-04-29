@@ -5,7 +5,7 @@ import socket
 from win10toast import ToastNotifier
 
 client = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
-vk_session = vk_api.VkApi(token='vk1.a.65QYb52KEZiaWgq5JQMdxe1fqib9bnwpXAdyeGFT2bRbgPz0ZlleoRYh__BGXOe5_itU_LiQtdcwTeQilOw0NflY3OCFy82gmLM1lZ2ZGetdmPnu97UC5DooMW0mZx-i45iDNLvkAp6ITjoWBLOxKX81vyDzNODkRN8YwOEtYGYQpW7oRw9O2zvx6SxGg6JVdsBowweGsGDQNrC6iePZKw')
+vk_session = vk_api.VkApi(token='')
 longpoll = VkBotLongPoll(vk_session, '213378612')
 toaster = ToastNotifier()
 
@@ -28,7 +28,7 @@ def main():
     """ Пример использования bots longpoll
         https://vk.com/dev/bots_longpoll
     """
-    vk_session = vk_api.VkApi(token='vk1.a.65QYb52KEZiaWgq5JQMdxe1fqib9bnwpXAdyeGFT2bRbgPz0ZlleoRYh__BGXOe5_itU_LiQtdcwTeQilOw0NflY3OCFy82gmLM1lZ2ZGetdmPnu97UC5DooMW0mZx-i45iDNLvkAp6ITjoWBLOxKX81vyDzNODkRN8YwOEtYGYQpW7oRw9O2zvx6SxGg6JVdsBowweGsGDQNrC6iePZKw')
+    vk_session = vk_api.VkApi(token='')
     longpoll = VkBotLongPoll(vk_session, '213378612')
     for event in longpoll.listen():
 
