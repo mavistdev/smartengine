@@ -22,7 +22,7 @@ class Start:
 
     def start_discordrpc(self):
         try:
-            subprocess.Popen(['py', 'C://Users/JustMavist/AppData/Roaming/SmartEngine/py.mav', '-3.10'])
+            subprocess.Popen(['py', 'C://Users/JustMavist/AppData/Roaming/SmartEngine/py.py', '-3.10'])
             state_discordrpc.configure(text = 'Discord RPC запущен. Ожидайте логи в консоль.')
         except Exception as e:
             state_discordrpc.configure(text = 'Ошибка запуска.')
@@ -52,13 +52,13 @@ class Start:
 
     # def start_tggrabber(self):
     #     try:
-    #         subprocess.Popen(['C://Users/JustMavist/AppData/Roaming/SmartEngine/opentvk.bat'])
+    #         subprocess.Popen(['C://Users/JustMavist/AppData/Roaming/SmartEngine/opentvk.py'])
     #     except Exception as e:
     #         print(e)
 
     # def start_tggrabber(self):
     #     try:
-    #         subprocess.Popen(['C://Users/JustMavist/AppData/Roaming/SmartEngine/opentvk.bat'])
+    #         subprocess.Popen(['C://Users/JustMavist/AppData/Roaming/SmartEngine/opentvk.py'])
     #     except Exception as e:
     #         print(e)
 
