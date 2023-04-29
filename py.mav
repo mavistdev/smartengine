@@ -1,0 +1,89 @@
+from pypresence import Presence
+import random
+import time
+import psutil
+import socket
+
+client = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
+client_id = "745509973043183707"
+start_time = time.time()
+a_start_time = time.time()
+test_strat_time = 1676981752.925028
+
+RPC = Presence(client_id=client_id)
+RPC.connect()
+
+def checkIfProcessRunning(processName):
+    for proc in psutil.process_iter():
+        try:
+            if processName.lower() in proc.name().lower():
+                return True
+        except (psutil.NoSuchProcess, psutil.AccessDenied, psutil.ZombieProcess):
+            pass
+    return False
+
+def connecttoserver(ip, port):
+    try:
+        client.connect((ip, port))
+        print('[DISCORD RPC] '.encode('utf-8'))
+    except:
+        print('Подключение не удалось. Сервер недоступен.')
+
+if connecttoserver("127.0.0.1", 12345):
+    print('[DISCORD RPC] connected'.encode('utf-8'))
+
+print(f'[DISCORD RPC] start time is {time.time()}'.encode('utf-8'))
+
+while True:
+
+    quotes = [
+    "Сделано в России",
+    "No Copyright Beats - ZAZ. На всех площадках ",
+    "Believe Music & Broma 16",
+    "Mav?",
+    '<div class="mav">.</div>',
+    "?php",
+    "Dev?",
+    "warden-news.ru",
+    "<3 U"
+]
+
+    if checkIfProcessRunning('vimeworld'):
+        RPC.update(buttons=[{"label": "VK", "url": "https://warden-news.ru/user/ItsNotMe"}, {"label": "YT", "url": "https://warden-news.ru/adm/redi/m/tyt"}], \
+    large_image="1", large_text="Это я!",
+            small_image="2", small_text="Это моё лого!", details="Играю в", state='vimeworld', start=start_time)
+        print('[DISCORD RPC] app vimeworld'.encode('utf-8'))
+        time.sleep(30)
+
+    elif checkIfProcessRunning('tor browser'):
+        RPC.update(buttons=[{"label": "VK", "url": "https://warden-news.ru/user/ItsNotMe"}, {"label": "YT", "url": "https://warden-news.ru/adm/redi/m/tyt"}], \
+    large_image="1", large_text="Это я!",
+            small_image="2", small_text="Это моё лого!", details="Играю в", state='vimeworld', start=start_time)
+        print('[DISCORD RPC] app tor browser'.encode('utf-8'))
+        time.sleep(30)
+
+    elif checkIfProcessRunning('firefox'):
+        RPC.update(buttons=[{"label": "VK", "url": "https://warden-news.ru/user/ItsNotMe"}, {"label": "YT", "url": "https://warden-news.ru/adm/redi/m/tyt"}], \
+    large_image="1", large_text="Это я!",
+            small_image="2", small_text="Это моё лого!", details="Сижу в", state='firefox', start=start_time)
+        print('[DISCORD RPC] app firefox'.encode('utf-8'))
+        time.sleep(30)
+
+    elif checkIfProcessRunning('csgo'):
+        RPC.update(buttons=[{"label": "VK", "url": "https://warden-news.ru/user/ItsNotMe"}, {"label": "YT", "url": "https://warden-news.ru/adm/redi/m/tyt"}], \
+    large_image="1", large_text="Это я!",
+            small_image="2", small_text="Это моё лого!", details="Играю в", state='CSGO', start=start_time)
+        print('[DISCORD RPC] app csgo'.encode('utf-8'))
+        time.sleep(30)
+
+    elif checkIfProcessRunning('webinar'):
+        RPC.update(buttons=[{"label": "VK", "url": "https://warden-news.ru/user/ItsNotMe"}, {"label": "YT", "url": "https://warden-news.ru/adm/redi/m/tyt"}], \
+    large_image="webinar",
+            small_image="2", small_text="Кастомизация панели администратора. Формы в Django. Сохраняем/редактируем/удаляем данные из формы.", details="Смотрит вебинар", state='Кастомизация панели администратора. Формы в Django. Сохраняем/редактируем/удаляем данные из формы.', start=start_time)
+        print('[DISCORD RPC] app webinar'.encode('utf-8'))
+        time.sleep(30)   
+        
+    else:
+        RPC.update(buttons=[{"label": "VK", "url": "https://warden-news.ru/user/ItsNotMe"}, {"label": "YT", "url": "https://warden-news.ru/adm/redi/m/tyt"}], \
+            large_image="3", large_text="vk.com/mavist_group", details="Про меня:", state=random.choice(quotes), start=a_start_time)
+        time.sleep(30) 

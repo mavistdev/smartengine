@@ -1,0 +1,134 @@
+from tkinter import *
+import time
+import socket
+from tkinter.ttk import Combobox
+import subprocess
+import os
+
+client = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
+
+# <#> Главные настройки </#>
+window = Tk()
+window.title("Mavist | SmartEngine")
+window.geometry('1920x1080')
+global start_ready
+start_ready = False
+
+class Start:
+    def __init__(self):
+        print('Создан объект класса Start.')
+        global start_ready
+        start_ready = True
+
+    def start_discordrpc(self):
+        try:
+            subprocess.Popen(['py', 'C://Users/JustMavist/AppData/Roaming/SmartEngine/py.mav', '-3.10'])
+            state_discordrpc.configure(text = 'Discord RPC запущен. Ожидайте логи в консоль.')
+        except Exception as e:
+            state_discordrpc.configure(text = 'Ошибка запуска.')
+            print(e)
+
+    def start_vkgrabber(self):
+        try:
+            subprocess.Popen(['C://Users/JustMavist/AppData/Roaming/SmartEngine/openvvk.bat'])
+            state_vkgrabber.configure(text = 'Вк Граббер запущен. Ожидайте логи в консоль.')
+        except Exception as e:
+            state_vkgrabber.configure(text = 'Ошибка запуска.')
+            print(e)       
+
+    def start_tggrabber(self):
+        try:
+            subprocess.Popen(['C://Users/JustMavist/AppData/Roaming/SmartEngine/opentvk.bat'])
+            state_tggrabber.configure(text = 'TGGRABBER запущен. Ожидайте логи в консоль.')
+        except Exception as e:
+            state_tggrabber.configure(text = 'Ошибка запуска.')
+            print(e)
+
+    def start_spotify(self):
+        try:
+            os.startfile(r'C://Users/JustMavist/AppData/Roaming/Spotify/Spotify.exe') 
+        except Exception as e:
+            print(e)
+
+    # def start_tggrabber(self):
+    #     try:
+    #         subprocess.Popen(['C://Users/JustMavist/AppData/Roaming/SmartEngine/opentvk.bat'])
+    #     except Exception as e:
+    #         print(e)
+
+    # def start_tggrabber(self):
+    #     try:
+    #         subprocess.Popen(['C://Users/JustMavist/AppData/Roaming/SmartEngine/opentvk.bat'])
+    #     except Exception as e:
+    #         print(e)
+
+engine = Start()
+if start_ready:
+    def screens_change():
+        if combo.get() == 'Запускатор':
+            pl_startup()
+        elif combo.get() == 'Консоль':
+            pass
+
+    def pl_startup():
+        btn_rpc.grid(column=1, row=0)
+        btn_vkgrabber.grid(column = 2, row = 0)
+        btn_tggrabber.grid(column = 3, row = 0)
+
+        state_discordrpc.grid(column = 1, row = 1)
+        state_vkgrabber.grid(column = 2, row = 1)
+        state_tggrabber.grid(column = 3, row = 1)
+
+        btn_spotify.grid(column = 1, row = 3)
+
+    # <#> переключалка (После всех функций) </#>
+    combo = Combobox(window) 
+    combo['values'] = ("Запускатор", "Консоль")
+    combo.current(0)  # установит вариант по умолчанию
+    combo.grid(column=1, row=2)
+    btn_combo = Button(window, text = 'Перейти', command = screens_change, padx=5, pady=5)
+    btn_combo.grid(column = 2, row = 2)
+
+    # <#> Функция подключения к серверу </#>
+    def connecttoserver(ip, port):
+        try:
+            client.connect((ip, port))
+            client.send('[SE_GUI] SmartEngine GUI connected'.encode('utf-8'))
+        except:
+            print('Подключение не удалось. Сервер недоступен.')
+            time.sleep(20)
+            connecttoserver("127.0.0.1", 12345)
+
+    connecttoserver("127.0.0.1", 12345)
+
+    # Текста кнопок
+    state_tggrabber = Label(window, text="TGGRABBER выключен", padx=5, pady=5)
+    state_vkgrabber = Label(window, text="VKGRABBER выключен", padx=5, pady=5)
+    state_discordrpc = Label(window, text="Discord RPC выключен", padx=5, pady=5)
+
+    # Кнопки
+    btn_rpc = Button(window, text="Запустить Discord RPC", command=engine.start_discordrpc, padx=5, pady=5)
+    btn_vkgrabber = Button(window, text = 'Запустить Вк Граббер.', command = engine.start_vkgrabber, padx=5, pady=5)
+    btn_tggrabber = Button(window, text = 'Запустить TGGRABBER.', command = engine.start_tggrabber, padx=5, pady=5)
+
+    btn_spotify = Button(window, text = 'Запустить Spotify.', command = engine.start_spotify, padx=5, pady=5)
+    # btn_tggrabber = Button(window, text = 'Запустить TGGRABBER.', command = engine.start_tggrabber, padx=5, pady=5)
+    # btn_tggrabber = Button(window, text = 'Запустить TGGRABBER.', command = engine.start_tggrabber, padx=5, pady=5)
+
+    # from pypresence import Presence
+    # import random
+    # import time
+    # import psutil
+    # import socket
+
+    # client = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
+    # client_id = "745509973043183707"
+    # start_time = time.time()
+    # a_start_time = time.time()
+    # test_strat_time = 1676981752.925028
+
+    # RPC = Presence(client_id=client_id)
+    # RPC.connect()
+    # RPC.update(buttons=[{"label": "VK", "url": "https://warden-news.ru/user/ItsNotMe"}, {"label": "YT", "url": "https://warden-news.ru/adm/redi/m/tyt"}], large_image="3", large_text="vk.com/mavist_group", details="В приложении:", state='FL Studio 20', start=a_start_time)
+
+    window.mainloop()
