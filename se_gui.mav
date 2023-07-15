@@ -5,7 +5,7 @@ from tkinter.ttk import Combobox
 import subprocess
 import os
 
-client = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
+# client = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
 
 # <#> Главные настройки </#>
 window = Tk()
@@ -22,10 +22,26 @@ class Start:
 
     def start_discordrpc(self):
         try:
-            subprocess.Popen(['py', 'C://Users/JustMavist/AppData/Roaming/SmartEngine/py.py', '-3.10'])
+            subprocess.Popen(['py', 'C://Users/JustMavist/AppData/Roaming/SmartEngine/py.mav', '-3.10'])
             state_discordrpc.configure(text = 'Discord RPC запущен. Ожидайте логи в консоль.')
         except Exception as e:
             state_discordrpc.configure(text = 'Ошибка запуска.')
+            print(e)
+
+    def start_discordself(self):
+        try:
+            subprocess.Popen(['py', 'C://Users/JustMavist/AppData/Roaming/SmartEngine/pythonDsSB/bot.py', '-3.10'])
+            state_discordselfbot.configure(text = 'Discord selfbot запущен. Ожидайте логи в консоль.')
+        except Exception as e:
+            state_discordselfbot.configure(text = 'Ошибка запуска.')
+            print(e)
+
+    def start_teleself(self):
+        try:
+            subprocess.Popen(['py', 'C://Users/JustMavist/AppData/Roaming/SmartEngine/telemav/tele.py', '-3.10'])
+            state_teleself.configure(text = 'Teleself запущен. Ожидайте логи в консоль.')
+        except Exception as e:
+            state_teleself.configure(text = 'Ошибка запуска.')
             print(e)
 
     def start_vkgrabber(self):
@@ -52,13 +68,13 @@ class Start:
 
     # def start_tggrabber(self):
     #     try:
-    #         subprocess.Popen(['C://Users/JustMavist/AppData/Roaming/SmartEngine/opentvk.py'])
+    #         subprocess.Popen(['C://Users/JustMavist/AppData/Roaming/SmartEngine/opentvk.bat'])
     #     except Exception as e:
     #         print(e)
 
     # def start_tggrabber(self):
     #     try:
-    #         subprocess.Popen(['C://Users/JustMavist/AppData/Roaming/SmartEngine/opentvk.py'])
+    #         subprocess.Popen(['C://Users/JustMavist/AppData/Roaming/SmartEngine/opentvk.bat'])
     #     except Exception as e:
     #         print(e)
 
@@ -74,10 +90,14 @@ if start_ready:
         btn_rpc.grid(column=1, row=0)
         btn_vkgrabber.grid(column = 2, row = 0)
         btn_tggrabber.grid(column = 3, row = 0)
+        btn_discordselfbot.grid(column = 4, row = 0)
+        btn_teleself.grid(column = 5, row = 0)
 
         state_discordrpc.grid(column = 1, row = 1)
         state_vkgrabber.grid(column = 2, row = 1)
         state_tggrabber.grid(column = 3, row = 1)
+        state_discordselfbot.grid(column = 4, row = 1)
+        state_teleself.grid(column = 5, row = 1)
 
         btn_spotify.grid(column = 1, row = 3)
 
@@ -99,17 +119,21 @@ if start_ready:
             time.sleep(20)
             connecttoserver("127.0.0.1", 12345)
 
-    connecttoserver("127.0.0.1", 12345)
+    # connecttoserver("127.0.0.1", 12345)
 
     # Текста кнопок
     state_tggrabber = Label(window, text="TGGRABBER выключен", padx=5, pady=5)
     state_vkgrabber = Label(window, text="VKGRABBER выключен", padx=5, pady=5)
     state_discordrpc = Label(window, text="Discord RPC выключен", padx=5, pady=5)
+    state_discordselfbot = Label(window, text="Discord selfbot выключен", padx=5, pady=5)
+    state_teleself = Label(window, text="teleself выключен", padx=5, pady=5)
 
     # Кнопки
     btn_rpc = Button(window, text="Запустить Discord RPC", command=engine.start_discordrpc, padx=5, pady=5)
     btn_vkgrabber = Button(window, text = 'Запустить Вк Граббер.', command = engine.start_vkgrabber, padx=5, pady=5)
     btn_tggrabber = Button(window, text = 'Запустить TGGRABBER.', command = engine.start_tggrabber, padx=5, pady=5)
+    btn_discordselfbot = Button(window, text = 'Запустить Discord selfbot.', command = engine.start_discordself, padx=5, pady=5)
+    btn_teleself = Button(window, text = 'Запустить teleself.', command = engine.start_teleself, padx=5, pady=5)
 
     btn_spotify = Button(window, text = 'Запустить Spotify.', command = engine.start_spotify, padx=5, pady=5)
     # btn_tggrabber = Button(window, text = 'Запустить TGGRABBER.', command = engine.start_tggrabber, padx=5, pady=5)
