@@ -9,27 +9,14 @@ vk_session = vk_api.VkApi(token='')
 longpoll = VkBotLongPoll(vk_session, '')
 toaster = ToastNotifier()
 
-def connecttoserver(ip, port):
-    try:
-        client.connect((ip, port))
-        client.send('[VK-MESSAGE-GRABBER] '.encode('utf-8'))
-    except:
-        print('Подключение не удалось. Сервер недоступен.')
-
-connecttoserver("127.0.0.1", 12345)
-client.send(' connected'.encode('utf-8'))
-
 def getid(uid):
     user = vk_session.method("users.get", {"user_ids": uid})
     fullname = user[0]['first_name'] +  ' ' + user[0]['last_name']
     return(fullname)
 
 def main():
-    """ Пример использования bots longpoll
-        https://vk.com/dev/bots_longpoll
-    """
     vk_session = vk_api.VkApi(token='')
-    longpoll = VkBotLongPoll(vk_session, '213378612')
+    longpoll = VkBotLongPoll(vk_session, '')
     for event in longpoll.listen():
 
         if event.type == VkBotEventType.MESSAGE_NEW:
@@ -88,7 +75,6 @@ def main():
         #     print()
 
 if __name__ == '__main__':
-    client.send('[VK-MESSAGE-GRABBER] connected'.encode('utf-8'))
     main()
 
 
