@@ -4,7 +4,6 @@ import time
 import psutil
 import socket
 
-client = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
 client_id = "745509973043183707"
 start_time = time.time()
 a_start_time = time.time()
@@ -22,24 +21,13 @@ def checkIfProcessRunning(processName):
             pass
     return False
 
-def connecttoserver(ip, port):
-    try:
-        client.connect((ip, port))
-        print('[DISCORD RPC] '.encode('utf-8'))
-    except:
-        print('Подключение не удалось. Сервер недоступен.')
-
-if connecttoserver("127.0.0.1", 12345):
-    print('[DISCORD RPC] connected'.encode('utf-8'))
 
 print(f'[DISCORD RPC] start time is {time.time()}'.encode('utf-8'))
 
 while True:
 
     quotes = [
-    "Сделано в России",
     "No Copyright Beats - ZAZ. На всех площадках ",
-    "Believe Music & Broma 16",
     "Mav?",
     '<div class="mav">.</div>',
     "?php",
