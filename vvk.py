@@ -6,7 +6,7 @@ from win10toast import ToastNotifier
 
 client = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
 vk_session = vk_api.VkApi(token='')
-longpoll = VkBotLongPoll(vk_session, '213378612')
+longpoll = VkBotLongPoll(vk_session, '')
 toaster = ToastNotifier()
 
 def connecttoserver(ip, port):
